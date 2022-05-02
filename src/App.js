@@ -12,16 +12,18 @@ function App() {
   ]);
 
   const createPost = (newPost) => {
-      setPosts([...posts, newPost]);
+    setPosts([...posts, newPost]);
   };
 
-  const removePost= (post) => {
-    setPosts(posts.filter(p=>p.id != post.id));
-};
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id != post.id));
+  };
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList posts={posts} title={'Post Python'} remove = {removePost}/>
+      {posts.length !== 0
+        ? <PostList posts={posts} title={'Post Python'} remove={removePost} />
+        : <h1 style={{ textAlign: 'center' }}>Нет постов</h1>}
     </div>
   );
 }
