@@ -22,7 +22,7 @@ function App() {
      <PostList posts={posts} title = {'Posts JavaScript'}/>
      <PostList posts={posts} title = {'Post Python'}/>
     </div>
-  )
+  );
 }
 
 export default App;
