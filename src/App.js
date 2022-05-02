@@ -20,9 +20,16 @@ function App() {
   const addNewPost = (e) => {
 
     e.preventDefault();
-    console.log(title)
-    console.log(description)
-  
+    const newPost = {
+      id:Date.now(),
+      name:title,
+      description
+    }
+    
+    console.log(newPost)
+    setPosts([...posts,newPost])
+    setTitle(' ');
+    setDescription(' ');
     // console.log(bodyInputRef.current.value)
   };
 
