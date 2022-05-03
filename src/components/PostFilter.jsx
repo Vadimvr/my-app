@@ -11,8 +11,8 @@ const PostFilter = ({ filter, setFilter }) => {
                 onChange={event => setFilter({ ...filter, query: event.target.value })}
                 placeholder='Поиск ...' />
             <MySelect
-                value={filter.sort}
-                onChange={selectedSort => setFilter({ ...filter, sort: selectedSort })}
+                value={filter.sorting}
+                onChange={selectedSort => setFilter({ ...filter, sorting: selectedSort })}
                 defaultValue='Сортировка'
                 options={[
                     { value: 'name', name: 'По имени' },

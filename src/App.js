@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
@@ -10,42 +10,45 @@ function App() {
     { id: 1, name: 'JavaScript 3', description: "Lorem 3." },
     { id: 2, name: 'JavaScript 1', description: "Lorem 2." },
     { id: 3, name: 'JavaScript 2', description: "Lorem 1." },
+    { id: 4, name: 'JavaScript 4', description: "Lorem 1." },
+    { id: 5, name: 'JavaScript 1', description: "Lorem 1." },
   ]);
 
-  const [filter, setFilter] = useState({sort:'', query:'' });
+  const [filter, setFilter] = useState({ sorting: '', query: '' });
   // const [selectedSort, setSelectedSort] = useState('');
   // const [searchQuery, setSearchQuery] = useState('');
 
   const sortedPosts = useMemo(() => {
-    console.log('getSortedPosted')
-    if (filter.sort) {
-      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
+    if (filter.sorting) {
+      console.log('сортировка true')
+      return [...posts].sort((a, b) => a[filter.sorting].localeCompare(b[filter.sorting]))
     }
     return posts;
-  }, [filter.sort, posts]);
+  }, [filter.sorting, posts]);
 
   const sortedAndSearchPosts = useMemo(() => {
-    console.log('sortedAndSearchPosts')
+    console.log('поиск')
     return sortedPosts.filter(post => post.name.toLowerCase().includes(filter.query.toLowerCase()))
-  }, [filter.query, posts]);
+  }, [filter.query, sortedPosts]);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
   };
 
   const removePost = (post) => {
-    setPosts(posts.filter(p => p.id != post.id));
+    setPosts(posts.filter(p => p.id !== post.id));
   };
 
 
 
   return (
     <div className="App">
+
       <PostForm create={createPost} />
       <hr style={{ margin: '12' }} />
       <PostFilter
         filter={filter}
-        setFilter = {setFilter}
+        setFilter={setFilter}
       />
       <PostList posts={sortedAndSearchPosts} title={'Post Python'} remove={removePost} />
     </div>
