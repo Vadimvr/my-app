@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
+import MySelect from "./components/UI/select/MySelect";
 import "./styles/App.css";
 
 function App() {
@@ -18,9 +19,23 @@ function App() {
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id != post.id));
   };
+
+  const [selectedSort, setSelectedSort] = useState('')
+
+  const fruits = ["Яблоко", "Апельсин", "Слива"];
   return (
     <div className="App">
       <PostForm create={createPost} />
+      <hr style={{ margin: '12' }} />
+      <MySelect
+        value={selectedSort}
+        onChange={sort => setSelectedSort(sort)}
+        defaultValue='Сортировка'
+        options={[
+          { value: 'title', name: 'По имени' },
+          { value: 'body', name: 'По описанию' },
+        ]}
+      />
       {posts.length !== 0
         ? <PostList posts={posts} title={'Post Python'} remove={removePost} />
         : <h1 style={{ textAlign: 'center' }}>Нет постов</h1>}
