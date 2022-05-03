@@ -7,9 +7,9 @@ import "./styles/App.css";
 function App() {
 
   const [posts, setPosts] = useState([
-    { id: 1, name: 'JavaScript 1', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, hic." },
-    { id: 2, name: 'JavaScript 2', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, hic." },
-    { id: 3, name: 'JavaScript 3', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, hic." },
+    { id: 1, name: 'JavaScript 3', description: "Lorem 3." },
+    { id: 2, name: 'JavaScript 1', description: "Lorem 2." },
+    { id: 3, name: 'JavaScript 2', description: "Lorem 1." },
   ]);
 
   const createPost = (newPost) => {
@@ -22,18 +22,22 @@ function App() {
 
   const [selectedSort, setSelectedSort] = useState('')
 
-  const fruits = ["Яблоко", "Апельсин", "Слива"];
+  const sortPost = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
+  };
+
   return (
     <div className="App">
       <PostForm create={createPost} />
       <hr style={{ margin: '12' }} />
       <MySelect
         value={selectedSort}
-        onChange={sort => setSelectedSort(sort)}
+        onChange={sortPost}
         defaultValue='Сортировка'
         options={[
-          { value: 'title', name: 'По имени' },
-          { value: 'body', name: 'По описанию' },
+          { value: 'name', name: 'По имени' },
+          { value: 'description', name: 'По описанию' },
         ]}
       />
       {posts.length !== 0
