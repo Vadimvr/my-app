@@ -32,15 +32,20 @@ function App() {
     console.log(pagesArray);
     const createPost = (newPost) => {
         setPosts([...posts, newPost]);
+
     };
 
     useEffect(() => {
         fetchPosts();
-    }, [])
+    }, [page])
 
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id));
     };
+
+    const ChangePage = (page) => {
+        setPage(page);
+    }
 
     return (
         <div className="App">
@@ -67,10 +72,10 @@ function App() {
             }
             <div className="page__wrapper">
                 {pagesArray.map(p =>
-                    <span 
-                    key={p} 
-                    className={page === p ? 'page page__current' : 'page'}
-                    onClick = {()=>setPage(p)}>
+                    <span
+                        key={p}
+                        className={page === p ? 'page page__current' : 'page'}
+                        onClick={() => ChangePage(p)}>
                         {p}
                     </span>
                 )}
