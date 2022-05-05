@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import PostService from "./API/PostServis";
 import { usePosts } from "./components/hooks/usePosts";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
@@ -21,9 +22,13 @@ function App() {
   };
 
   async function fetchPosts() {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    setPosts(response.data);
+    const posts = await PostService.getAll();
+    setPosts(posts);
   }
+
+  useEffect(()=>{
+    fetchPosts();
+  },[])
 
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id));
@@ -31,8 +36,7 @@ function App() {
 
   return (
     <div className="App">
-     <button onClick={fetchPosts}>dd</button>
-      <MyButton style={{ marginTop: 15 }} onClick={() => setModal(true)}>Add</MyButton>
+     <MyButton style={{ marginTop: 15 }} onClick={() => setModal(true)}>Add</MyButton>
       <MyModal
         visible={modal}
         setVisible={setModal}>
