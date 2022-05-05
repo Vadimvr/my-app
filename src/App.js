@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { usePosts } from "./components/hooks/usePosts";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
@@ -10,16 +10,16 @@ import "./styles/App.css";
 function App() {
 
   const [posts, setPosts] = useState([
-    { id: 1, name: 'JavaScript 3', description: "Lorem 3." },
-    { id: 2, name: 'JavaScript 1', description: "Lorem 2." },
-    { id: 3, name: 'JavaScript 2', description: "Lorem 1." },
-    { id: 4, name: 'JavaScript 4', description: "Lorem 1." },
-    { id: 5, name: 'JavaScript 1', description: "Lorem 1." },
+    { id: 1, title: 'JavaScript 3', body: "Lorem 3." },
+    { id: 2, title: 'JavaScript 1', body: "Lorem 2." },
+    { id: 3, title: 'JavaScript 2', body: "Lorem 1." },
+    { id: 4, title: 'JavaScript 4', body: "Lorem 1." },
+    { id: 5, title: 'JavaScript 1', body: "Lorem 1." },
   ]);
 
   const [filter, setFilter] = useState({ sorting: '', query: '' });
   const [modal, setModal] = useState(false)
-  const sortedAndSearchPosts = usePosts(posts,filter.sorting,filter.query); 
+  const sortedAndSearchPosts = usePosts(posts, filter.sorting, filter.query);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
