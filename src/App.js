@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { usePosts } from "./components/hooks/usePosts";
 import PostFilter from "./components/PostFilter";
@@ -9,13 +10,7 @@ import "./styles/App.css";
 
 function App() {
 
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'JavaScript 3', body: "Lorem 3." },
-    { id: 2, title: 'JavaScript 1', body: "Lorem 2." },
-    { id: 3, title: 'JavaScript 2', body: "Lorem 1." },
-    { id: 4, title: 'JavaScript 4', body: "Lorem 1." },
-    { id: 5, title: 'JavaScript 1', body: "Lorem 1." },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState({ sorting: '', query: '' });
   const [modal, setModal] = useState(false)
@@ -25,12 +20,18 @@ function App() {
     setPosts([...posts, newPost]);
   };
 
+  async function fetchPosts() {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    setPosts(response.data);
+  }
+
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id));
   };
 
   return (
     <div className="App">
+     <button onClick={fetchPosts}>dd</button>
       <MyButton style={{ marginTop: 15 }} onClick={() => setModal(true)}>Add</MyButton>
       <MyModal
         visible={modal}
