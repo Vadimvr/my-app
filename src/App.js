@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostService from "./API/PostService";
 import { useFetching } from "./components/hooks/useFetching";
 import { usePosts } from "./components/hooks/usePosts";
+import Pagination from "./components/pagination/Pagination";
 import PostFilter from "./components/PostFilter";
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
@@ -15,12 +16,12 @@ function App() {
     const [posts, setPosts] = useState([]);
     const [filter, setFilter] = useState({ sorting: '', query: '' });
     const [modal, setModal] = useState(false)
-    const [totalPages, setTotalPages] = useState(0);
-    const [limit, setLimit] = useState(10);
+    const [totalPages, setTotalPages] = giuseState(0);
+    const [limit, setLimit] = useState(3);
     const [page, setPage] = useState(1);
     const sortedAndSearchPosts = usePosts(posts, filter.sorting, filter.query);
 
-    let pagesArray = getPagesArray(totalPages);
+   
     const [fetchPosts, isPostLoading, postError] = useFetching(async (limit, page) => {
         const response = await PostService.getAll(limit, page);
         setPosts(response.data);
@@ -28,7 +29,6 @@ function App() {
         setTotalPages(getPageCount(totalCount, limit));
     });
 
-    console.log(pagesArray);
     const createPost = (newPost) => {
         setPosts([...posts, newPost]);
     };
@@ -41,7 +41,7 @@ function App() {
         setPosts(posts.filter(p => p.id !== post.id));
     };
 
-    const ChangePage = (page) => {
+    const changePage = (page) => {
         setPage(page);
         fetchPosts(limit, page)
     }
@@ -69,16 +69,7 @@ function App() {
                 </div>
                 : <PostList posts={sortedAndSearchPosts} title={'Posts'} remove={removePost} />
             }
-            <div className="page__wrapper">
-                {pagesArray.map(p =>
-                    <span
-                        key={p}
-                        className={page === p ? 'page page__current' : 'page'}
-                        onClick={() => ChangePage(p)}>
-                        {p}
-                    </span>
-                )}
-            </div>
+           <Pagination totalPages={totalPages} page={page} changePage={changePage}/>
         </div>
     );
 }
