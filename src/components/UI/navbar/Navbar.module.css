@@ -1,0 +1,17 @@
+.navbar {
+    width: 100vw;
+    height: 50px;
+    display: inline-flex;
+    background-color: lightgray;
+    align-items: center;
+    padding: 0 15px;
+    justify-content: left;
+}
+
+.navbar__links {
+    margin-left: auto;
+}
+
+.navbar__links_link {
+    padding: 0 15px;
+}

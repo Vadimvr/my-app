@@ -7,10 +7,12 @@
 
 #root {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .App {
+    justify-content: center;
     width: 500px;
 }
 
@@ -53,7 +55,9 @@
     margin-top: 30px;
     display: flex;
 }
-.page__current{
+
+.page__current {
     border: 2px solid orange;
     font-weight: bold;
 }
+
