@@ -17,7 +17,7 @@ function Posts() {
     const [filter, setFilter] = useState({ sorting: '', query: '' });
     const [modal, setModal] = useState(false)
     const [totalPages, setTotalPages] = useState(0);
-    const [limit] = useState(3);
+    const [limit] = useState(15);
     const [page, setPage] = useState(1);
     const sortedAndSearchPosts = usePosts(posts, filter.sorting, filter.query);
 
