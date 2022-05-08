@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostService from "../API/PostService";
 import { useFetching } from "../hooks/useFetching";
 import { usePosts } from "../hooks/usePosts";
-import Pagination from "../components/pagination/Pagination";
+import Pagination from "../components/UI/pagination/Pagination";
 import PostFilter from "../components/PostFilter";
 import PostForm from "../components/PostForm";
 import PostList from "../components/PostList";

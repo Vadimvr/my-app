@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Routes } from "react-router-dom";
-import { privateRoutes, publicRoutes } from "../route/index";
+import { AuthContext } from '../context';
+import { privateRoutes, publicRoutes } from "../router/index";
 
 const AppRouter = () => {
-    const isAuth = true;
+
+    const {isAuth,setIsAuth} =useContext(AuthContext);
+    console.log(isAuth)
     return (
         isAuth
             ?
@@ -12,17 +15,18 @@ const AppRouter = () => {
                     <Route
                         path={route.path}
                         element={route.element}
-                        exact={route.exact} />
+                        exact={route.exact}
+                        key = {route.path} />
                 )}
             </Routes>
             :
             <Routes>
-
                 {publicRoutes.map(route =>
                     <Route
                         path={route.path}
                         element={route.element}
-                        exact={route.exact} />
+                        exact={route.exact} 
+                        key = {route.path} />
                 )}
             </Routes>
     );

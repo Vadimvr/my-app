@@ -11,12 +11,10 @@ const PostIdPage = () => {
     const [fetchPostById, isLoadingPost, errorPost] = useFetching(async (id) => {
         const response = await PostService.getById(id);
         setPost(response.data);
-        console.log(response.data)
     });
 
     const [fetchCommentsById, isLoadingComments, errorComments] = useFetching(async (id) => {
         const response = await PostService.getCommentsByPostId(id);
-        console.log(response.data);
         setComments(response.data);
     });
     useEffect(() => {
@@ -49,7 +47,9 @@ const PostIdPage = () => {
                 : <div>
                     {comments.map(comment =>
                         
-                        <div style={{marginTop :15}}>
+                        <div
+                        key = {comment.id }
+                        style={{marginTop :15}}>
                             <h5>
                                 {comment.email}
                             </h5>
