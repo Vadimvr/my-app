@@ -48,6 +48,7 @@ const PostIdPage = () => {
                 </div>
                 : <div>
                     {comments.map(comment =>
+                        
                         <div style={{marginTop :15}}>
                             <h5>
                                 {comment.email}
